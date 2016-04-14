@@ -16,7 +16,7 @@ class Game extends Canvas implements Runnable
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
 		new Window(WIDTH, HEIGHT, "Ultimate Street Smash Rumble Fighter Z 2: Maximum Ninja Storm", this);
-		System.out.println("This is a test.");
+		
 		hud = new HUD();
 		
 		handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
