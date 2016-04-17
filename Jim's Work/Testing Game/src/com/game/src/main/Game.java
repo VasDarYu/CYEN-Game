@@ -35,7 +35,7 @@ public class Game extends Canvas implements Runnable
 		BufferedImageLoader loader = new BufferedImageLoader(); //creates a new image loader
 		try
 		{
-			spriteSheet = loader.loadImage("/Justin Frames.png"); //loads a spritesheet
+			spriteSheet = loader.loadImage("/Serra Frames.png"); //loads a spritesheet
 		}
 		catch(IOException e)
 		{
@@ -172,6 +172,13 @@ public class Game extends Canvas implements Runnable
 		else if(key == KeyEvent.VK_DOWN)
 		{
 			p.setVelY(5);
+		}else if(key == KeyEvent.VK_Z)
+		{
+			p.setSecond(true);
+		}
+		else if(key == KeyEvent.VK_X)
+		{
+			p.setPunch(true);
 		}
 	}
 	public void keyReleased(KeyEvent e)
@@ -193,5 +200,13 @@ public class Game extends Canvas implements Runnable
 		{
 			p.setVelY(0);
 		}
-	}
+		else if(key == KeyEvent.VK_Z)
+		{
+			p.setSecond(false);
+		}
+		else if(key == KeyEvent.VK_X)
+		{
+			p.setPunch(false);
+		}
+	}	
 }
