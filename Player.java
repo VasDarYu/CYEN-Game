@@ -1,15 +1,20 @@
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Rectangle;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.File;
 
 class Player extends GameObject
 {
 	Handler handler;
-	
+	BufferedImage ship;
 	public Player(int x, int y, ID id, Handler handler)
 	{
 		super(x, y, id);
 		this.handler = handler;
+		
 	}
 	
 	public Rectangle getBounds()
@@ -44,8 +49,13 @@ class Player extends GameObject
 	
 	public void render(Graphics g)
 	{
-		if(id == ID.Player) g.setColor(Color.green);
-		else g.setColor(Color.blue);
-		g.fillRect(x, y, 32, 32);
+		try 
+		{
+			ship = ImageIO.read(new File("ship.png"));
+		} catch (IOException e) {System.out.println("This is bullshit:" + e);}
+	    //if(id == ID.Player) g.setColor(Color.green);
+		//else g.setColor(Color.blue);
+		//g.fillRect(x, y, 32, 32);
+		g.drawImage(ship, x, y, null);
 	}
 }

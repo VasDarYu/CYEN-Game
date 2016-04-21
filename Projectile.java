@@ -1,11 +1,14 @@
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Rectangle;
-
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.File;
 class Projectile extends GameObject
 {
 	private Handler handler;
-	
+	private BufferedImage fireball;
 	public Projectile(int x, int y, ID id, Handler handler)
 	{
 		super(x, y, id);
@@ -31,7 +34,13 @@ class Projectile extends GameObject
 	}
 	public void render(Graphics g)
 	{
-		g.setColor(Color.red);
-		g.fillRect(x, y, 16, 16);
+		try 
+		{
+			fireball = ImageIO.read(new File("fireball.png"));
+		} catch (IOException e) {System.out.println("This is bullshit:" + e);}
+	    //if(id == ID.Player) g.setColor(Color.green);
+		//else g.setColor(Color.blue);
+		//g.fillRect(x, y, 32, 32);
+		g.drawImage(fireball, x, y, null);
 	}
 }
