@@ -2,17 +2,27 @@ import java.awt.Canvas;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics;
 import java.awt.Color;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.File;
 
 class Game extends Canvas implements Runnable
 {
-	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
+	//public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
+	public static final int WIDTH = 750, HEIGHT = 525;
 	private Thread thread;
 	private boolean running = false;
 	private Handler handler;
 	private HUD hud;
+	private BufferedImage bg;
 	
 	public Game()
 	{
+		try 
+		{
+			bg = ImageIO.read(new File("bg1.png"));
+		} catch (IOException e) {System.out.println("This is bullshit:" + e);}
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
 		new Window(WIDTH, HEIGHT, "Ultimate Street Smash Rumble Fighter Z 2: Maximum Ninja Storm", this);
@@ -77,6 +87,7 @@ class Game extends Canvas implements Runnable
 	private void tick()
 	{
 		handler.tick();
+		
 		hud.tick();
 	}
 	
@@ -88,12 +99,10 @@ class Game extends Canvas implements Runnable
 			this.createBufferStrategy(3);
 			return;
 		}
-		
+
 		Graphics g = bs.getDrawGraphics();
 		
-		g.setColor(Color.black);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
-		
+		g.drawImage(bg, 0, 0, WIDTH, HEIGHT, null);
 		
 		handler.render(g);
 		hud.render(g);
