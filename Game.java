@@ -46,7 +46,7 @@ class Game extends Canvas implements Runnable
 	{
 		try 
 		{
-			bg = ImageIO.read(new File("bg1.png"));
+			bg = ImageIO.read(new File("bg/bg1.png"));
 		} catch (IOException e) {}
 	}
 	

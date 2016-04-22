@@ -36,8 +36,8 @@ class Projectile extends GameObject
 	{
 		try 
 		{
-			fireball = ImageIO.read(new File("fireball.png"));
-		} catch (IOException e) {System.out.println("This is bullshit:" + e);}
+			fireball = ImageIO.read(new File("spr/fireball.png"));
+		} catch (IOException e) {}
 	    //if(id == ID.Player) g.setColor(Color.green);
 		//else g.setColor(Color.blue);
 		//g.fillRect(x, y, 32, 32);

@@ -51,8 +51,8 @@ class Player extends GameObject
 	{
 		try 
 		{
-			ship = ImageIO.read(new File("ship.png"));
-		} catch (IOException e) {System.out.println("This is bullshit:" + e);}
+			ship = ImageIO.read(new File("spr/ship.png"));
+		} catch (IOException e) {}
 	    //if(id == ID.Player) g.setColor(Color.green);
 		//else g.setColor(Color.blue);
 		//g.fillRect(x, y, 32, 32);
