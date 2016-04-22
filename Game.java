@@ -16,21 +16,38 @@ class Game extends Canvas implements Runnable
 	private Handler handler;
 	private HUD hud;
 	private BufferedImage bg;
+	private Menu menu;
+	
+	public static enum STATE
+	{
+		MENU,
+		GAME
+	};
+	
+	public static STATE State = STATE.MENU;
 	
 	public Game()
 	{
-		try 
-		{
-			bg = ImageIO.read(new File("bg1.png"));
-		} catch (IOException e) {System.out.println("This is bullshit:" + e);}
+		menu = new Menu();
+		initImages();
 		handler = new Handler();
 		this.addKeyListener(new KeyInput(handler));
+		this.addMouseListener(new MouseInput());
 		new Window(WIDTH, HEIGHT, "Ultimate Street Smash Rumble Fighter Z 2: Maximum Ninja Storm", this);
 		
 		hud = new HUD();
 		
+		
 		handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
 		handler.addObject(new Projectile(WIDTH / 2 + 64, HEIGHT / 2 - 32, ID.Projectile, handler));
+	}
+	
+	private void initImages()
+	{
+		try 
+		{
+			bg = ImageIO.read(new File("bg1.png"));
+		} catch (IOException e) {}
 	}
 	
 	public synchronized void start()
@@ -86,9 +103,11 @@ class Game extends Canvas implements Runnable
 	
 	private void tick()
 	{
+		if(State == STATE.GAME)
+		{
 		handler.tick();
-		
 		hud.tick();
+		}	
 	}
 	
 	private void render()
@@ -102,10 +121,21 @@ class Game extends Canvas implements Runnable
 
 		Graphics g = bs.getDrawGraphics();
 		
-		g.drawImage(bg, 0, 0, WIDTH, HEIGHT, null);
 		
-		handler.render(g);
-		hud.render(g);
+		if(State == STATE.GAME)
+		{
+			g.drawImage(bg, 0, 0, WIDTH, HEIGHT, null);
+		
+			handler.render(g);
+			hud.render(g);
+		} else if(State == STATE.MENU)
+		{
+			g.setColor(Color.black);
+			g.fillRect(0, 0, WIDTH, HEIGHT);
+			
+			menu.render(g);
+		}		
+		
 		
 		g.dispose();
 		bs.show();
