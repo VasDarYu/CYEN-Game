@@ -19,7 +19,7 @@ class Player extends GameObject
 	
 	public Rectangle getBounds()
 	{
-		return new Rectangle(x, y, 32, 32);
+		return new Rectangle(x, y, 64, 64);
 	}
 	
 	public void tick()
@@ -44,6 +44,13 @@ class Player extends GameObject
 					HUD.HEALTH -= 2;
 				}
 			}
+			else if(obj.getID() == ID.Star)
+			{
+			    if(getBounds().intersects(obj.getBounds()))
+				{
+					HUD.HEALTH += 2;
+				}
+			 }
 		}
 	}
 	

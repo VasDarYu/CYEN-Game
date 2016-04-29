@@ -1,4 +1,4 @@
 enum ID
 {
-	Player(), Player2(), Projectile(), Trail();
+	Player(), Player2(), Projectile(), Trail(), Star();
 }

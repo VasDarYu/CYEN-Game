@@ -31,6 +31,13 @@ class MouseInput implements MouseListener
 				Game.State = Game.STATE.GAME;
 			}
 		}
+		//if(mx >=Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50)
+		//{
+		//	if(my >= 300 && my <= 350)
+		//	{
+		//		Menu.help = true;
+		//	}
+		//}
 		if(mx >=Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50)
 		{
 			if(my >= 400 && my <= 450)
