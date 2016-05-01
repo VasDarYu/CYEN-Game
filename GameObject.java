@@ -57,4 +57,5 @@ abstract class GameObject
 	{
 		return velY;
 	}
+	
 }

@@ -9,12 +9,12 @@ class Star extends GameObject
 {
 	private Handler handler;
 	private BufferedImage star;
-	public Star(int x, int y, ID id, Handler handler)
-	{
-		super(x, y, id);
-		this.handler = handler;
-		velX = 5;
-		velY = 5;
+	public Star(int x, int y, ID id, Handler handler, int vertical)
+    {
+        super(x, y, id);
+        this.handler = handler;
+        //velX = vertical;
+        velY = vertical;
 	}
 	
 	public Rectangle getBounds()
@@ -29,8 +29,8 @@ class Star extends GameObject
 		
 		//x = Game.clamp(x, 0, Game.WIDTH - 37);
 		//y = Game.clamp(y, 0, Game.HEIGHT - 60);
-		if(y <= 0 || y >= Game.HEIGHT - 48) velY *= -1;
-		if(x <= 0 || x >= Game.WIDTH - 32) velX *= -1;
+		//if(y <= 0 || y >= Game.HEIGHT - 48) handler.removeObject(this);
+		//if(x <= 0 || x >= Game.WIDTH - 32) velX *= -1;
 	}
 	public void render(Graphics g)
 	{
@@ -42,5 +42,9 @@ class Star extends GameObject
 		//else g.setColor(Color.blue);
 		//g.fillRect(x, y, 32, 32);
 		g.drawImage(star, x, y, null);
+	}
+	public void delete()
+	{
+	    handler.removeObject(this);
 	}
 }

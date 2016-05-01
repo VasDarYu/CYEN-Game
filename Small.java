@@ -9,12 +9,12 @@ class Small extends GameObject
 {
 	private Handler handler;
 	private BufferedImage fireball;
-	public Small(int x, int y, ID id, Handler handler)
+	public Small(int x, int y, ID id, Handler handler, int vertical)
 	{
 		super(x, y, id);
 		this.handler = handler;
-		velX = 5;
-		velY = 5;
+		//velX = vertical;
+		velY = vertical;
 	}
 	
 	public Rectangle getBounds()
@@ -24,12 +24,12 @@ class Small extends GameObject
 	
 	public void tick()
 	{
-		x += velX;
+		//x += velX;
 		y += velY;
 		
 		//x = Game.clamp(x, 0, Game.WIDTH - 37);
 		//y = Game.clamp(y, 0, Game.HEIGHT - 60);
-		if(y <= 0 || y >= Game.HEIGHT - 32) velY *= -1;
+		//if(y >= Game.HEIGHT) handler.removeObject(this);
 		if(x <= 0 || x >= Game.WIDTH - 16) velX *= -1;
 	}
 	public void render(Graphics g)
@@ -43,4 +43,5 @@ class Small extends GameObject
 		//g.fillRect(x, y, 32, 32);
 		g.drawImage(fireball, x, y, null);
 	}
+	
 }

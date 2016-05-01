@@ -9,13 +9,13 @@ class Big extends GameObject
 {
 	private Handler handler;
 	private BufferedImage green;
-	public Big(int x, int y, ID id, Handler handler)
-	{
-		super(x, y, id);
-		this.handler = handler;
-		velX = 5;
-		velY = 5;
-	}
+	public Big(int x, int y, ID id, Handler handler, int vertical)
+    {
+        super(x, y, id);
+        this.handler = handler;
+        //velX = vertical;
+        velY = vertical;
+    }
 	
 	public Rectangle getBounds()
 	{
@@ -24,13 +24,13 @@ class Big extends GameObject
 	
 	public void tick()
 	{
-		x += velX;
+		//x += velX;
 		y += velY;
 		
 		//x = Game.clamp(x, 0, Game.WIDTH - 37);
 		//y = Game.clamp(y, 0, Game.HEIGHT - 60);
-		if(y <= 0 || y >= Game.HEIGHT - 64) velY *= -1;
-		if(x <= 0 || x >= Game.WIDTH - 64) velX *= -1;
+		//if(y <= 0 || y >= Game.HEIGHT - 64) handler.removeObject(this);
+		//if(x <= 0 || x >= Game.WIDTH - 64) velX *= -1;
 	}
 	public void render(Graphics g)
 	{
@@ -43,4 +43,5 @@ class Big extends GameObject
 		//g.fillRect(x, y, 32, 32);
 		g.drawImage(green, x, y, null);
 	}
+	
 }

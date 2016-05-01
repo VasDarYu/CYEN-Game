@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.File;
+import java.util.Random;
 
 class Game extends Canvas implements Runnable
 {
@@ -17,33 +18,40 @@ class Game extends Canvas implements Runnable
     private HUD hud;
     private BufferedImage bg;
     private Menu menu;
-    boolean lose = false;
-    
+    private Random random;
+    private Lose lose;
     public static enum STATE
     {
         MENU,
         GAME,
-        HELP
+        HELP,
+        LOSE
     };
     
     public static STATE State = STATE.MENU;
     
+    public int randomGenerator(int min, int max)
+    {
+        int x = random.nextInt(max - min + 1) + min;
+        return x;
+    }
+    
     public Game()
     {
         menu = new Menu();
+        lose = new Lose();
         initImages();
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
         this.addMouseListener(new MouseInput());
         new Window(WIDTH, HEIGHT, "Ultimate Space Smash Rumble Fighter Z 2: Maximum Bullet Storm", this);
         
+        random = new Random();
+        
         hud = new HUD();
         
         
         handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
-        handler.addObject(new Boss(WIDTH / 2 + 64, HEIGHT / 2 - 32, ID.Projectile, handler));
-        handler.addObject(new Medium(WIDTH / 2 - 64, HEIGHT / 2 - 32, ID.Projectile, handler));
-        handler.addObject(new Big(WIDTH / 2 + 64, HEIGHT / 2 - 32, ID.Projectile, handler));
     }
     
     private void initImages()
@@ -115,10 +123,13 @@ class Game extends Canvas implements Runnable
             {
                 gameOver();
             }
+            bullet();
         }
-        
+        //else
+        //{
+        //    handler.tick();
+        //}
     }
-    
     private void render()
     {
         BufferStrategy bs = this.getBufferStrategy();
@@ -139,26 +150,19 @@ class Game extends Canvas implements Runnable
             hud.render(g);
         } else if(State == STATE.MENU)
         {
-            if(lose!=true)
-            {
+            
                 g.setColor(Color.white);
                 g.fillRect(0, 0, WIDTH, HEIGHT);
             
                 menu.render(g);
-            }
-            else
-            {
-                g.setColor(Color.red);
-                g.fillRect(0, 0, WIDTH, HEIGHT);
-            
-                menu.renderLose(g);   
-            }
-        } else if(State == STATE.HELP)
+           
+        } 
+        else if(State == STATE.LOSE)
         {
-            g.setColor(Color.white);
+            g.setColor(Color.red);
             g.fillRect(0, 0, WIDTH, HEIGHT);
             
-            menu.render(g);
+            lose.render(g);
             
         }
         
@@ -181,8 +185,44 @@ class Game extends Canvas implements Runnable
     
     public void gameOver()
     {
-        lose = true;
-        Game.State = Game.STATE.MENU;
+        Game.State = Game.STATE.LOSE;
         HUD.HEALTH = 100;
+        //handler.delete();
+    }
+    
+    private void bullet()
+    {
+        if(State == STATE.GAME)
+        {    
+            int a = randomGenerator(1,100);
+            if(a%20 == 0)
+            {
+                int x = randomGenerator(16, WIDTH-16);
+                int yspeed = randomGenerator(1,5);
+                //int xspeed = randomGenerator(1,5);
+                handler.addObject(new Small(x, 0, ID.Projectile, handler, yspeed));
+            }
+            else if(a%25 == 0)
+            {
+                int x = randomGenerator(32, WIDTH-32);
+                int yspeed = randomGenerator(1,5);
+                //int xspeed = randomGenerator(1,5);
+                handler.addObject(new Medium(x, 0, ID.Projectile, handler, yspeed));
+            }
+            else if(a%30 == 0)
+            {
+                int x = randomGenerator(64, WIDTH-64);
+                int yspeed = randomGenerator(1,5);
+                //int xspeed = randomGenerator(1,5);
+                handler.addObject(new Big(x, 0, ID.Projectile, handler, yspeed));
+            }
+            else if(a==1)
+            {
+                int x = randomGenerator(32, WIDTH-32);
+                int yspeed = randomGenerator(1,5);
+                //int xspeed = randomGenerator(1,5);
+                handler.addObject(new Star(x, 0, ID.Star, handler, yspeed));
+            }
+        }
     }
 }

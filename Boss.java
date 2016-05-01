@@ -43,4 +43,5 @@ class Boss extends GameObject
 		//g.fillRect(x, y, 32, 32);
 		g.drawImage(boss, x, y, null);
 	}
+	
 }
