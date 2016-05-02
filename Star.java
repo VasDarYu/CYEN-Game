@@ -34,7 +34,7 @@ class Star extends GameObject
 		//y = Game.clamp(y, 0, Game.HEIGHT - 60);
 		if(y >= Game.HEIGHT) 
 		{
-		    x= game.randomGenerator(164, game.WIDTH-64);
+		    x = game.randomGenerator(164, game.WIDTH-64);
 		    y=0;
 		    
             //velX = game.randomGenerator(1, 5);

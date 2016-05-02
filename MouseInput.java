@@ -43,7 +43,7 @@ class MouseInput implements MouseListener
         {
           if(my >= 300 && my <= 350)
           {
-              if(Game.State==Game.STATE.MENU || Game.State==Game.STATE.LOSE)
+              if(Game.State==Game.STATE.MENU)
                 {
                     game.epic = true;
                     Game.State = Game.STATE.GAME;
@@ -54,7 +54,7 @@ class MouseInput implements MouseListener
         {
             if(my >= 400 && my <= 450)
             {
-                if(Game.State==Game.STATE.MENU)
+                if(Game.State==Game.STATE.MENU|| Game.State==Game.STATE.LOSE)
                 {
                     System.exit(1);
                 }
