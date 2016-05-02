@@ -4,6 +4,7 @@ import java.awt.event.MouseEvent;
 
 class MouseInput implements MouseListener
 {
+    Game game;
     public void mouseClicked(MouseEvent arg0)
     {
         
@@ -38,13 +39,17 @@ class MouseInput implements MouseListener
                 }
             }
         }
-        //if(mx >=Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50)
-        //{
-        //  if(my >= 300 && my <= 350)
-        //  {
-        //      Menu.help = true;
-        //  }
-        //}
+        if(mx >=Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50)
+        {
+          if(my >= 300 && my <= 350)
+          {
+              if(Game.State==Game.STATE.MENU)
+                {
+                    game.epic = true;
+                    Game.State = Game.STATE.GAME;
+                }
+          }
+        }
         if(mx >=Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50)
         {
             if(my >= 400 && my <= 450)

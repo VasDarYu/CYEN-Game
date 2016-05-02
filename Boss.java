@@ -7,14 +7,17 @@ import java.io.IOException;
 import java.io.File;
 class Boss extends GameObject
 {
+    private Game game;
 	private Handler handler;
 	private BufferedImage boss;
-	public Boss(int x, int y, ID id, Handler handler)
+	//public  boolean gone = false;
+	public Boss(int x, int y, ID id, Handler handler, int vertical, Game game)
 	{
 		super(x, y, id);
 		this.handler = handler;
-		velX = 5;
-		velY = 5;
+		this.game=game;
+		//velX = 5;
+		velY = vertical;
 	}
 	
 	public Rectangle getBounds()
@@ -29,7 +32,11 @@ class Boss extends GameObject
 		
 		//x = Game.clamp(x, 0, Game.WIDTH - 37);
 		//y = Game.clamp(y, 0, Game.HEIGHT - 60);
-		if(y <= 0 || y >= Game.HEIGHT - (208+16)) velY *= -1;
+		if(y >= Game.HEIGHT) 
+		{
+		    x= game.randomGenerator(16, game.WIDTH-16);
+		    y=0;
+		  }
 		if(x <= 0 || x >= Game.WIDTH - 208) velX *= -1;
 	}
 	public void render(Graphics g)

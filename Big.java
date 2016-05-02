@@ -7,13 +7,16 @@ import java.io.IOException;
 import java.io.File;
 class Big extends GameObject
 {
+    private Game game;
 	private Handler handler;
 	private BufferedImage green;
-	public Big(int x, int y, ID id, Handler handler, int vertical)
+	//public  boolean gone = false;
+	public Big(int x, int y, ID id, Handler handler, int vertical, int horizontal, Game game)
     {
         super(x, y, id);
         this.handler = handler;
-        //velX = vertical;
+        this.game = game;
+        velX = horizontal;
         velY = vertical;
     }
 	
@@ -24,13 +27,20 @@ class Big extends GameObject
 	
 	public void tick()
 	{
-		//x += velX;
+		x += velX;
 		y += velY;
 		
 		//x = Game.clamp(x, 0, Game.WIDTH - 37);
 		//y = Game.clamp(y, 0, Game.HEIGHT - 60);
-		//if(y <= 0 || y >= Game.HEIGHT - 64) handler.removeObject(this);
-		//if(x <= 0 || x >= Game.WIDTH - 64) velX *= -1;
+		if(y >= Game.HEIGHT) 
+		{
+		    x= game.randomGenerator(164, game.WIDTH-64);
+		    y=0;
+		    
+            velX = game.randomGenerator(1, 5);
+            velY = game.randomGenerator(1, 5);
+		  }
+		if(x <= 0 || x >= Game.WIDTH - 64) velX *= -1;
 	}
 	public void render(Graphics g)
 	{

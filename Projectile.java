@@ -9,6 +9,7 @@ class Projectile extends GameObject
 {
 	private Handler handler;
 	private BufferedImage fireball;
+	//public  boolean gone = false;
 	public Projectile(int x, int y, ID id, Handler handler)
 	{
 		super(x, y, id);

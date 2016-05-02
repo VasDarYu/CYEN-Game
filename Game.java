@@ -20,6 +20,10 @@ class Game extends Canvas implements Runnable
     private Menu menu;
     private Random random;
     private Lose lose;
+    private int time = 0;
+    public boolean epic = false;
+    private boolean read = false;
+    private boolean read2 = false;
     public static enum STATE
     {
         MENU,
@@ -52,6 +56,7 @@ class Game extends Canvas implements Runnable
         
         
         handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
+        //handler.addObject(new Star(randomGenerator(64, WIDTH-64), 0, ID.Star, handler, randomGenerator(1,5), this));
     }
     
     private void initImages()
@@ -91,6 +96,14 @@ class Game extends Canvas implements Runnable
         double delta = 0;
         long timer = System.currentTimeMillis();
         int frames = 0;
+        if (read == false)
+        {
+            if (epic==true)
+            {
+                time = 600;
+            }
+            read = true;
+        }
         while (running)
         {
             long now = System.nanoTime();
@@ -106,6 +119,7 @@ class Game extends Canvas implements Runnable
             if (System.currentTimeMillis() - timer > 1000)
             {
                 timer += 1000;
+                time += 1;
                 System.out.println("FPS: " + frames);
                 frames = 0;
             }
@@ -117,6 +131,18 @@ class Game extends Canvas implements Runnable
     {
         if(State == STATE.GAME)
         {
+            if(epic==false)
+            {
+                if (read2==false)
+                {
+                
+                
+                    handler.addObject(new Star(randomGenerator(64, WIDTH-64), 0, ID.Star, handler, randomGenerator(1,5), this));
+           
+                    read2=true;
+                
+                }
+            }
             handler.tick();
             hud.tick();
             if(HUD.HEALTH == 0)
@@ -194,35 +220,58 @@ class Game extends Canvas implements Runnable
     {
         if(State == STATE.GAME)
         {    
-            int a = randomGenerator(1,100);
-            if(a%20 == 0)
+            
+            int a = randomGenerator(1,150);
+            if(a%20 == 0 && handler.count <13)
             {
-                int x = randomGenerator(16, WIDTH-16);
-                int yspeed = randomGenerator(1,5);
-                //int xspeed = randomGenerator(1,5);
-                handler.addObject(new Small(x, 0, ID.Projectile, handler, yspeed));
+                 int x = randomGenerator(16, WIDTH-16);
+                 int yspeed = randomGenerator(1,5);
+                 int xspeed = randomGenerator(-10,10);
+                 handler.addObject(new Small(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
             }
-            else if(a%25 == 0)
+            else if(time>60)
             {
-                int x = randomGenerator(32, WIDTH-32);
-                int yspeed = randomGenerator(1,5);
-                //int xspeed = randomGenerator(1,5);
-                handler.addObject(new Medium(x, 0, ID.Projectile, handler, yspeed));
+                if(a%30 == 0 && handler.count <24)
+                {
+                    int x = randomGenerator(32, WIDTH-32);
+                    int yspeed = randomGenerator(1,5);
+                    int xspeed = randomGenerator(-10,10);
+                    handler.addObject(new Medium(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
+                }
+                else if (time>120)
+                {
+                    if(a%75 == 0 && handler.count < 30)
+                    {
+                        int x = randomGenerator(64, WIDTH-64);
+                        int yspeed = randomGenerator(1,5);
+                        int xspeed = randomGenerator(-5,5);
+                        handler.addObject(new Big(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
+                    }
+                    else if(time>300)
+                    {
+                        int b = randomGenerator(1,1000);
+                        if(b==1 && handler.count <31)
+                        {
+                            int x = randomGenerator(128, WIDTH-128);
+                            int yspeed = randomGenerator(1,5);
+                            //int xspeed = randomGenerator(1,5);
+                            handler.addObject(new Boss(x, 0, ID.Projectile, handler, yspeed, this));
+                        }
+                    }
+                }
             }
-            else if(a%30 == 0)
+            else if(time<600)
             {
-                int x = randomGenerator(64, WIDTH-64);
-                int yspeed = randomGenerator(1,5);
-                //int xspeed = randomGenerator(1,5);
-                handler.addObject(new Big(x, 0, ID.Projectile, handler, yspeed));
-            }
-            else if(a==1)
-            {
-                int x = randomGenerator(32, WIDTH-32);
-                int yspeed = randomGenerator(1,5);
-                //int xspeed = randomGenerator(1,5);
-                handler.addObject(new Star(x, 0, ID.Star, handler, yspeed));
+                int b = randomGenerator(1,1000);
+                if(b==1)
+                {
+                    int x = randomGenerator(64, WIDTH-64);
+                    int yspeed = randomGenerator(1,5);
+                    //int xspeed = randomGenerator(1,5);
+                    //handler.addObject(new Star(x, 0, ID.Star, handler, yspeed));
+                }
             }
         }
     }
 }
+

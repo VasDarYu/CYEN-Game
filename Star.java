@@ -7,12 +7,15 @@ import java.io.IOException;
 import java.io.File;
 class Star extends GameObject
 {
+    private Game game;
 	private Handler handler;
 	private BufferedImage star;
-	public Star(int x, int y, ID id, Handler handler, int vertical)
+	//public  boolean gone = false;
+	public Star(int x, int y, ID id, Handler handler, int vertical, Game game)
     {
         super(x, y, id);
         this.handler = handler;
+        this.game = game;
         //velX = vertical;
         velY = vertical;
 	}
@@ -29,8 +32,15 @@ class Star extends GameObject
 		
 		//x = Game.clamp(x, 0, Game.WIDTH - 37);
 		//y = Game.clamp(y, 0, Game.HEIGHT - 60);
-		//if(y <= 0 || y >= Game.HEIGHT - 48) handler.removeObject(this);
-		//if(x <= 0 || x >= Game.WIDTH - 32) velX *= -1;
+		if(y >= Game.HEIGHT) 
+		{
+		    x= game.randomGenerator(164, game.WIDTH-64);
+		    y=0;
+		    
+            //velX = game.randomGenerator(1, 5);
+            velY = game.randomGenerator(1, 5);
+		  }
+		if(x <= 0 || x >= Game.WIDTH - 32) velX *= -1;
 	}
 	public void render(Graphics g)
 	{

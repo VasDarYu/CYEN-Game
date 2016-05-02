@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.File;
 class Lose
 {
-    public Rectangle tryButton = new Rectangle(Game.WIDTH / 2 - 50, 200, 100, 50);
+    //public Rectangle tryButton = new Rectangle(Game.WIDTH / 2 - 50, 200, 100, 50);
 	public Rectangle exitButton = new Rectangle(Game.WIDTH / 2 - 50, 400, 100, 50);
     public void render(Graphics g)
     {
@@ -26,11 +26,11 @@ class Lose
         Font fnt1 = new Font("arial", Font.BOLD, 30);
         g.setFont(fnt1);
         
-        g.drawString("Back", tryButton.x +19, tryButton.y +35);
+        //g.drawString("Back", tryButton.x +19, tryButton.y +35);
         //g.drawString("Help", helpButton.x + 19, helpButton.y + 35);
         g.drawString("Exit", exitButton.x + 19, exitButton.y + 35);
         
-        g2d.draw(tryButton);
+        //g2d.draw(tryButton);
         g2d.draw(exitButton);
     }
 }

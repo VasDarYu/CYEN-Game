@@ -6,6 +6,7 @@ abstract class GameObject
 	protected int x, y;
 	protected ID id;
 	protected int velX, velY;
+	public  boolean gone = false;
 	
 	public GameObject(int x, int y, ID id)
 	{

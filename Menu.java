@@ -35,36 +35,12 @@ class Menu
 		Font fnt1 = new Font("arial", Font.BOLD, 30);
 		g.setFont(fnt1);
 		
-		g.drawString("Play", playButton.x +19, playButton.y +35);
-		//g.drawString("Help", helpButton.x + 19, helpButton.y + 35);
+		g.drawString("Play", playButton.x + 19, playButton.y + 35);
+		g.drawString("Epic", helpButton.x + 19, helpButton.y + 35);
 		g.drawString("Exit", exitButton.x + 19, exitButton.y + 35);
 		
 		g2d.draw(playButton);
-		//g2d.draw(helpButton);
-		g2d.draw(exitButton);
-	}
-	
-	public void renderLose(Graphics g)
-	{
-		Graphics2D g2d = (Graphics2D)g;
-		
-		Font fnt0 = new Font("arial", Font.BOLD, 50);
-		g.setFont(fnt0);
-		g.setColor(Color.white);
-		g.drawString("You lose", (Game.WIDTH/2 - 100), 50);
-		//g.drawString("Fighter Z 2:", 240, 100);
-		//g.drawString("Maximum Ninja Storm", 100, 150);
-	
-		
-		Font fnt1 = new Font("arial", Font.BOLD, 30);
-		g.setFont(fnt1);
-		
-		g.drawString("Play", playButton.x +19, playButton.y +35);
-		//g.drawString("Help", helpButton.x + 19, helpButton.y + 35);
-		g.drawString("Exit", exitButton.x + 19, exitButton.y + 35);
-		
-		g2d.draw(playButton);
-		//g2d.draw(helpButton);
+		g2d.draw(helpButton);
 		g2d.draw(exitButton);
 	}
 	

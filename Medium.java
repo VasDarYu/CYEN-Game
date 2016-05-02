@@ -7,13 +7,16 @@ import java.io.IOException;
 import java.io.File;
 class Medium extends GameObject
 {
+    private Game game;
     private Handler handler;
     private BufferedImage zap;
-    public Medium(int x, int y, ID id, Handler handler, int vertical)
+    //public  boolean gone = false;
+    public Medium(int x, int y, ID id, Handler handler, int vertical, int horizontal, Game game)
     {
         super(x, y, id);
         this.handler = handler;
-        //velX = vertical;
+        this.game = game;
+        velX = horizontal;
         velY = vertical;
     }
     
@@ -24,13 +27,20 @@ class Medium extends GameObject
     
     public void tick()
     {
-        //x += velX;
+        x += velX;
         y += velY;
         
         //x = Game.clamp(x, 0, Game.WIDTH - 37);
         //y = Game.clamp(y, 0, Game.HEIGHT - 60);
-        //if(y <= 0 || y >= Game.HEIGHT - 48) handler.removeObject(this);
-        //if(x <= 0 || x >= Game.WIDTH - 32) velX *= -1;
+        if(y >= Game.HEIGHT) 
+		{
+		    x= game.randomGenerator(32, game.WIDTH-32);
+		    y=0;
+		    
+            velX = game.randomGenerator(1, 5);
+            velY = game.randomGenerator(1, 5);
+		  }
+        if(x <= 0 || x >= Game.WIDTH - 32) velX *= -1;
     }
     public void render(Graphics g)
     {

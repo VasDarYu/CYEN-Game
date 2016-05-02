@@ -51,7 +51,7 @@ class Player extends GameObject
                     if(getBounds().intersects(obj.getBounds()))
                     {
                         HUD.HEALTH += 2;
-                        //handler.removeObject(obj);
+                        //obj.gone = true;
                     }
                 }
             }
