@@ -21,9 +21,10 @@ class Game extends Canvas implements Runnable
     private Random random;
     private Lose lose;
     private int time = 0;
-    public boolean epic = false;
+    public static boolean epic = false;
     private boolean read = false;
     private boolean read2 = false;
+    private boolean boss = false;
     public static enum STATE
     {
         MENU,
@@ -96,14 +97,7 @@ class Game extends Canvas implements Runnable
         double delta = 0;
         long timer = System.currentTimeMillis();
         int frames = 0;
-        if (read == false)
-        {
-            if (epic==true)
-            {
-                time = 600;
-            }
-            read = true;
-        }
+        
         while (running)
         {
             long now = System.nanoTime();
@@ -131,6 +125,14 @@ class Game extends Canvas implements Runnable
     {
         if(State == STATE.GAME)
         {
+            if (read == false)
+                {
+                    if (epic==true)
+                    {
+                        time = 295;
+                    }
+                    read = true;
+                }
             if(epic==false)
             {
                 if (read2==false)
@@ -170,6 +172,7 @@ class Game extends Canvas implements Runnable
         
         if(State == STATE.GAME)
         {
+            
             g.drawImage(bg, 0, 0, WIDTH, HEIGHT, null);
         
             handler.render(g);
@@ -249,26 +252,16 @@ class Game extends Canvas implements Runnable
                     }
                     else if(time>300)
                     {
-                        int b = randomGenerator(1,1000);
-                        if(b==1 && handler.count <31)
+                        //int b = randomGenerator(1,1000);
+                        if(boss!=true)
                         {
                             int x = randomGenerator(128, WIDTH-128);
                             int yspeed = randomGenerator(3,8);
-                            int xspeed = randomGenerator(-5,5);
-                            handler.addObject(new Boss(x, 0, ID.Projectile, handler, yspeed, this));
+                            int xspeed = randomGenerator(-3,3);
+                            handler.addObject(new Boss(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
+                            boss=true;
                         }
                     }
-                }
-            }
-            else if(time<600)
-            {
-                int b = randomGenerator(1,1000);
-                if(b==1)
-                {
-                    int x = randomGenerator(64, WIDTH-64);
-                    int yspeed = randomGenerator(1,5);
-                    //int xspeed = randomGenerator(1,5);
-                    //handler.addObject(new Star(x, 0, ID.Star, handler, yspeed));
                 }
             }
         }

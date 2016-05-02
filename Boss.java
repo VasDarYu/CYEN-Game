@@ -11,12 +11,12 @@ class Boss extends GameObject
 	private Handler handler;
 	private BufferedImage boss;
 	//public  boolean gone = false;
-	public Boss(int x, int y, ID id, Handler handler, int vertical, Game game)
+	public Boss(int x, int y, ID id, Handler handler, int vertical, int horizontal, Game game)
 	{
 		super(x, y, id);
 		this.handler = handler;
 		this.game=game;
-		//velX = 5;
+		velX = horizontal;
 		velY = vertical;
 	}
 	
