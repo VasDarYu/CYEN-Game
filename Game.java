@@ -55,7 +55,7 @@ class Game extends Canvas implements Runnable
         hud = new HUD();
         
         
-        handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
+        handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this));
         //handler.addObject(new Star(randomGenerator(64, WIDTH-64), 0, ID.Star, handler, randomGenerator(1,5), this));
     }
     
@@ -63,7 +63,7 @@ class Game extends Canvas implements Runnable
     {
         try 
         {
-            bg = ImageIO.read(new File("bg/bg1.png"));
+            bg = ImageIO.read(new File("bg/Space1.png"));
         } catch (IOException e) {}
     }
     
@@ -222,28 +222,28 @@ class Game extends Canvas implements Runnable
         {    
             
             int a = randomGenerator(1,150);
-            if(a%20 == 0 && handler.count <13)
+            if(a%20 == 0 && handler.count <16)
             {
                  int x = randomGenerator(16, WIDTH-16);
-                 int yspeed = randomGenerator(1,5);
+                 int yspeed = randomGenerator(3,8);
                  int xspeed = randomGenerator(-10,10);
                  handler.addObject(new Small(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
             }
             else if(time>60)
             {
-                if(a%30 == 0 && handler.count <24)
+                if(a%30 == 0 && handler.count <31)
                 {
                     int x = randomGenerator(32, WIDTH-32);
-                    int yspeed = randomGenerator(1,5);
+                    int yspeed = randomGenerator(3,8);
                     int xspeed = randomGenerator(-10,10);
                     handler.addObject(new Medium(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
                 }
                 else if (time>120)
                 {
-                    if(a%75 == 0 && handler.count < 30)
+                    if(a%75 == 0 && handler.count < 39)
                     {
                         int x = randomGenerator(64, WIDTH-64);
-                        int yspeed = randomGenerator(1,5);
+                        int yspeed = randomGenerator(3,8);
                         int xspeed = randomGenerator(-5,5);
                         handler.addObject(new Big(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
                     }
@@ -253,8 +253,8 @@ class Game extends Canvas implements Runnable
                         if(b==1 && handler.count <31)
                         {
                             int x = randomGenerator(128, WIDTH-128);
-                            int yspeed = randomGenerator(1,5);
-                            //int xspeed = randomGenerator(1,5);
+                            int yspeed = randomGenerator(3,8);
+                            int xspeed = randomGenerator(-5,5);
                             handler.addObject(new Boss(x, 0, ID.Projectile, handler, yspeed, this));
                         }
                     }

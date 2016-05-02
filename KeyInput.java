@@ -18,10 +18,10 @@ class KeyInput extends KeyAdapter
 			if (obj.getID() == ID.Player)
 			{
 				//Key events for Player 1
-				if (key == KeyEvent.VK_W) obj.setVelY(-5);
-				if (key == KeyEvent.VK_S) obj.setVelY(5);
-				if (key == KeyEvent.VK_A) obj.setVelX(-5);
-				if (key == KeyEvent.VK_D) obj.setVelX(5);
+				if (key == KeyEvent.VK_W) obj.setVelY(-8);
+				if (key == KeyEvent.VK_S) obj.setVelY(8);
+				if (key == KeyEvent.VK_A) obj.setVelX(-8);
+				if (key == KeyEvent.VK_D) obj.setVelX(8);
 			}
 		}
 	}

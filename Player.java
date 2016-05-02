@@ -8,9 +8,10 @@ import java.io.File;
 
 class Player extends GameObject
 {
+    Game game;
     Handler handler;
     BufferedImage ship;
-    public Player(int x, int y, ID id, Handler handler)
+    public Player(int x, int y, ID id, Handler handler, Game game)
     {
         super(x, y, id);
         this.handler = handler;
@@ -43,15 +44,17 @@ class Player extends GameObject
                 {
                     if(getBounds().intersects(obj.getBounds()))
                     {
-                        HUD.HEALTH -= 2;
+                        HUD.HEALTH -= 15;
+                        
+                        obj.y=game.HEIGHT;
                     }
                 }
                 else if(obj.getID() == ID.Star)
                 {
                     if(getBounds().intersects(obj.getBounds()))
                     {
-                        HUD.HEALTH += 2;
-                        //obj.gone = true;
+                        HUD.HEALTH += 10;
+                        obj.y=game.HEIGHT;
                     }
                 }
             }
