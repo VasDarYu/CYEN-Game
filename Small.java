@@ -10,6 +10,7 @@ class Small extends GameObject
     private Game game;
     private Handler handler;
     private BufferedImage fireball;
+    private int a;
     //public  boolean gone = false;
     public Small(int x, int y, ID id, Handler handler, int vertical, int horizontal, Game game)
     {
@@ -27,8 +28,7 @@ class Small extends GameObject
     
     public void tick()
     {
-        x += velX;
-        y += velY;
+        move();
         
         //x = Game.clamp(x, 0, Game.WIDTH - 37);
         //y = Game.clamp(y, 0, Game.HEIGHT  - 60);
@@ -36,7 +36,7 @@ class Small extends GameObject
         {
             x= game.randomGenerator(16, game.WIDTH-16);
             y=0;
-            
+            a = game.randomGenerator(0,1);
             velX = game.randomGenerator(1, 5);
             velY = game.randomGenerator(1, 5);
           }
@@ -54,4 +54,17 @@ class Small extends GameObject
         g.drawImage(fireball, x, y, null);
     }
     
+    private void move()
+    {
+        
+        if(a==1)
+        {
+            x+=velX;
+        }
+        else 
+        {
+            x-=velX;
+        }
+        y+=velY;
+    }
 }

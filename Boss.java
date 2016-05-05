@@ -10,6 +10,7 @@ class Boss extends GameObject
     private Game game;
 	private Handler handler;
 	private BufferedImage boss;
+	private int a;
 	//public  boolean gone = false;
 	public Boss(int x, int y, ID id, Handler handler, int vertical, int horizontal, Game game)
 	{
@@ -27,15 +28,17 @@ class Boss extends GameObject
 	
 	public void tick()
 	{
-		x += velX;
-		y += velY;
+		move();
 		
 		//x = Game.clamp(x, 0, Game.WIDTH - 37);
 		//y = Game.clamp(y, 0, Game.HEIGHT - 60);
 		if(y >= Game.HEIGHT) 
 		{
-		    x= game.randomGenerator(16, game.WIDTH-16);
-		    y=0;
+		    x= game.randomGenerator(128, game.WIDTH-128);
+		    y=-128;
+            a = game.randomGenerator(0,1);
+            velX = game.randomGenerator(1, 5);
+            velY = game.randomGenerator(1, 5);
 		  }
 		if(x <= 0 || x >= Game.WIDTH - 208) velX *= -1;
 	}
@@ -51,4 +54,17 @@ class Boss extends GameObject
 		g.drawImage(boss, x, y, null);
 	}
 	
+	private void move()
+    {
+       
+        if(a==1)
+        {
+            x+=velX;
+        }
+        else 
+        {
+            x-=velX;
+        }
+        y+=velY;
+    }
 }

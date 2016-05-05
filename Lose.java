@@ -30,7 +30,7 @@ class Lose
         //g.drawString("Help", helpButton.x + 19, helpButton.y + 35);
         g.drawString("Exit", exitButton.x + 19, exitButton.y + 35);
         
-        //g2d.draw(tryButton);
+        g2d.draw(tryButton);
         g2d.draw(exitButton);
     }
 }

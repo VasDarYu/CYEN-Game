@@ -53,7 +53,7 @@ class Player extends GameObject
                 {
                     if(getBounds().intersects(obj.getBounds()))
                     {
-                        HUD.HEALTH += 10;
+                        HUD.HEALTH += 15;
                         obj.y=game.HEIGHT;
                     }
                 }

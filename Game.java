@@ -7,7 +7,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.File;
 import java.util.Random;
-
+/**
+ * This is the main game class.
+ * This is what starts the game, spawns new enemies, and keeps track of FPS.
+ */
 class Game extends Canvas implements Runnable
 {
     //public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
@@ -35,12 +38,20 @@ class Game extends Canvas implements Runnable
     
     public static STATE State = STATE.MENU;
     
+    /**
+     * This class picks a random number. This is used in picking the speeds and x position of the bullets when they spawn.
+     */
     public int randomGenerator(int min, int max)
     {
         int x = random.nextInt(max - min + 1) + min;
         return x;
     }
     
+    /**
+     * Constructor method
+     * 
+     * Creates all the nessessary objects and spawns the player.
+     */
     public Game()
     {
         menu = new Menu();
@@ -60,6 +71,9 @@ class Game extends Canvas implements Runnable
         //handler.addObject(new Star(randomGenerator(64, WIDTH-64), 0, ID.Star, handler, randomGenerator(1,5), this));
     }
     
+    /**
+     * As the name may imply, this method initializes the background image for the game.
+     */
     private void initImages()
     {
         try 
@@ -68,6 +82,9 @@ class Game extends Canvas implements Runnable
         } catch (IOException e) {}
     }
     
+    /**
+     * This method starts the game.
+     */
     public synchronized void start()
     {
         thread = new Thread(this);
@@ -75,6 +92,9 @@ class Game extends Canvas implements Runnable
         running = true;
     }
     
+    /**
+     * This method stops the game.
+     */
     public synchronized void stop()
     {
         try
@@ -88,6 +108,9 @@ class Game extends Canvas implements Runnable
         }
     }
     
+    /**
+     * When the game starts, this method loops. It prints the FPS and creates the ticks.
+     */
     public void run()
     {
         this.requestFocus();
@@ -121,6 +144,10 @@ class Game extends Canvas implements Runnable
         stop();
     }
     
+    /**
+     * This is the tick method. When it runs, it makes bullets fall, determines if the game is in EPIC mode, and runs the handler and HUD
+     * objects.
+     */
     private void tick()
     {
         if(State == STATE.GAME)
@@ -158,6 +185,11 @@ class Game extends Canvas implements Runnable
         //    handler.tick();
         //}
     }
+    
+    /**
+     * This creates the graphic object that will be used throughout the program.
+     * It also draws all of the backgrounds for all of the game states.
+     */
     private void render()
     {
         BufferStrategy bs = this.getBufferStrategy();
@@ -200,6 +232,9 @@ class Game extends Canvas implements Runnable
         bs.show();
     }
     
+    /**
+     * This determines if an object can move past a certain x or y position.
+     */
     public static int clamp(int var, int min, int max)
     {
         if(var >= max) return var = max;
@@ -207,18 +242,29 @@ class Game extends Canvas implements Runnable
         else return var;
     }
     
+    /**
+     * Begins the game.
+     */
     public static void main(String [] args)
     {
         new Game();
     }
     
+    /**
+     * Creates a game-over state.
+     */
     public void gameOver()
     {
         Game.State = Game.STATE.LOSE;
         HUD.HEALTH = 100;
-        //handler.delete();
+        handler.reset();
+        time=0;
     }
     
+    /**
+     * Makes it rain bullets.
+     * Only 41 bullets will spawn ever, regardless of game mode.
+     */
     private void bullet()
     {
         if(State == STATE.GAME)
@@ -229,7 +275,7 @@ class Game extends Canvas implements Runnable
             {
                  int x = randomGenerator(16, WIDTH-16);
                  int yspeed = randomGenerator(3,8);
-                 int xspeed = randomGenerator(-10,10);
+                 int xspeed = randomGenerator(0,10);
                  handler.addObject(new Small(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
             }
             else if(time>60)
@@ -238,7 +284,7 @@ class Game extends Canvas implements Runnable
                 {
                     int x = randomGenerator(32, WIDTH-32);
                     int yspeed = randomGenerator(3,8);
-                    int xspeed = randomGenerator(-10,10);
+                    int xspeed = randomGenerator(0,10);
                     handler.addObject(new Medium(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
                 }
                 else if (time>120)
@@ -247,7 +293,7 @@ class Game extends Canvas implements Runnable
                     {
                         int x = randomGenerator(64, WIDTH-64);
                         int yspeed = randomGenerator(3,8);
-                        int xspeed = randomGenerator(-5,5);
+                        int xspeed = randomGenerator(0,5);
                         handler.addObject(new Big(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
                     }
                     else if(time>300)
@@ -257,8 +303,8 @@ class Game extends Canvas implements Runnable
                         {
                             int x = randomGenerator(128, WIDTH-128);
                             int yspeed = randomGenerator(3,8);
-                            int xspeed = randomGenerator(-3,3);
-                            handler.addObject(new Boss(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
+                            int xspeed = randomGenerator(0,3);
+                            handler.addObject(new Boss(x, -128, ID.Projectile, handler, yspeed, xspeed, this));
                             boss=true;
                         }
                     }

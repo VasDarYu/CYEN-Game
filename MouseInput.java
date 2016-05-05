@@ -31,6 +31,7 @@ class MouseInput implements MouseListener
             {
                 if(Game.State==Game.STATE.MENU)
                 {
+                    game.epic=false;
                     Game.State = Game.STATE.GAME;
                 }
                 else if(Game.State==Game.STATE.LOSE)

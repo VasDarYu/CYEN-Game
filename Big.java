@@ -11,6 +11,7 @@ class Big extends GameObject
 	private Handler handler;
 	private BufferedImage green;
 	//public  boolean gone = false;
+	private int a;
 	public Big(int x, int y, ID id, Handler handler, int vertical, int horizontal, Game game)
     {
         super(x, y, id);
@@ -27,8 +28,7 @@ class Big extends GameObject
 	
 	public void tick()
 	{
-		x += velX;
-		y += velY;
+		move();
 		
 		//x = Game.clamp(x, 0, Game.WIDTH - 37);
 		//y = Game.clamp(y, 0, Game.HEIGHT - 60);
@@ -37,6 +37,7 @@ class Big extends GameObject
 		    x= game.randomGenerator(164, game.WIDTH-64);
 		    y=0;
 		    
+            a = game.randomGenerator(0,1);
             velX = game.randomGenerator(1, 5);
             velY = game.randomGenerator(1, 5);
 		  }
@@ -54,4 +55,17 @@ class Big extends GameObject
 		g.drawImage(green, x, y, null);
 	}
 	
+	private void move()
+    {
+        
+        if(a==1)
+        {
+            x+=velX;
+        }
+        else 
+        {
+            x-=velX;
+        }
+        y+=velY;
+    }
 }

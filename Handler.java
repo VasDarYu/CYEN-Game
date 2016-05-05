@@ -45,4 +45,11 @@ class Handler
         //System.out.println(i);
         count = i;
     }
+    public void reset()
+    {
+        for(GameObject obj : object)
+        {
+            obj.y=game.HEIGHT;
+        }
+    }
 }

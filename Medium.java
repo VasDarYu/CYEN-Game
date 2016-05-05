@@ -11,6 +11,7 @@ class Medium extends GameObject
     private Handler handler;
     private BufferedImage zap;
     //public  boolean gone = false;
+    private int a;
     public Medium(int x, int y, ID id, Handler handler, int vertical, int horizontal, Game game)
     {
         super(x, y, id);
@@ -27,8 +28,7 @@ class Medium extends GameObject
     
     public void tick()
     {
-        x += velX;
-        y += velY;
+        move();
         
         //x = Game.clamp(x, 0, Game.WIDTH - 37);
         //y = Game.clamp(y, 0, Game.HEIGHT - 60);
@@ -37,6 +37,7 @@ class Medium extends GameObject
 		    x= game.randomGenerator(32, game.WIDTH-32);
 		    y=0;
 		    
+            a = game.randomGenerator(0,1);
             velX = game.randomGenerator(1, 5);
             velY = game.randomGenerator(1, 5);
 		  }
@@ -52,5 +53,19 @@ class Medium extends GameObject
         //else g.setColor(Color.blue);
         //g.fillRect(x, y, 32, 32);
         g.drawImage(zap, x, y, null);
+    }
+    
+    private void move()
+    {
+        
+        if(a==1)
+        {
+            x+=velX;
+        }
+        else 
+        {
+            x-=velX;
+        }
+        y+=velY;
     }
 }
