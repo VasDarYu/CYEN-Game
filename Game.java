@@ -28,6 +28,7 @@ class Game extends Canvas implements Runnable
     private boolean read = false;
     private boolean read2 = false;
     private boolean boss = false;
+    private int loop = 0;
     public static enum STATE
     {
         MENU,
@@ -136,6 +137,10 @@ class Game extends Canvas implements Runnable
             if (System.currentTimeMillis() - timer > 1000)
             {
                 timer += 1000;
+                if(Game.State==Game.STATE.GAME)
+                {
+                    time+=1;
+                }
                 System.out.println("FPS: " + frames);
                 frames = 0;
             }
@@ -178,7 +183,6 @@ class Game extends Canvas implements Runnable
                 gameOver();
             }
             bullet();
-            time+=1;
         }
         //else
         //{
@@ -269,7 +273,7 @@ class Game extends Canvas implements Runnable
     {
         if(State == STATE.GAME)
         {    
-            
+            if(time==0)boss=false;
             int a = randomGenerator(1,150);
             if(a%20 == 0 && handler.count <16)
             {
@@ -306,6 +310,12 @@ class Game extends Canvas implements Runnable
                             int xspeed = randomGenerator(0,3);
                             handler.addObject(new Boss(x, -128, ID.Projectile, handler, yspeed, xspeed, this));
                             boss=true;
+                            
+                        }
+                        else if(time>360)
+                        {
+                            loop+=1;
+                            time=0;
                         }
                     }
                 }

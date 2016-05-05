@@ -26,11 +26,11 @@ class Lose
         Font fnt1 = new Font("arial", Font.BOLD, 30);
         g.setFont(fnt1);
         
-        g.drawString("Back", tryButton.x +19, tryButton.y +35);
+        //g.drawString("Back", tryButton.x +19, tryButton.y +35);
         //g.drawString("Help", helpButton.x + 19, helpButton.y + 35);
         g.drawString("Exit", exitButton.x + 19, exitButton.y + 35);
         
-        g2d.draw(tryButton);
+        //g2d.draw(tryButton);
         g2d.draw(exitButton);
     }
 }
