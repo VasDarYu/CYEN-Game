@@ -28,7 +28,7 @@ class Menu
 		try 
 		{
 			logo = ImageIO.read(new File("bg/logo.png"));
-		} catch (IOException e) {System.out.println("This is bullshit:" + e);}
+		} catch (IOException e) {}
 		
 		g.drawImage(logo, 0, 0, Game.WIDTH/2, Game.HEIGHT/2, null);
 		

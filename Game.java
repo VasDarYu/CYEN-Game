@@ -29,6 +29,7 @@ class Game extends Canvas implements Runnable
     private boolean read2 = false;
     private boolean boss = false;
     private int loop = 0;
+	private Score score;
     public static enum STATE
     {
         MENU,
@@ -66,6 +67,7 @@ class Game extends Canvas implements Runnable
         random = new Random();
         
         hud = new HUD();
+		score = new Score();
         
         
         handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this));
@@ -161,6 +163,7 @@ class Game extends Canvas implements Runnable
                     if (epic==true)
                     {
                         time = 295;
+						score.scoreMult = 4;
                     }
                     read = true;
                 }
@@ -178,6 +181,7 @@ class Game extends Canvas implements Runnable
             }
             handler.tick();
             hud.tick();
+			score.tick();
             if(HUD.HEALTH == 0)
             {
                 gameOver();
@@ -208,11 +212,12 @@ class Game extends Canvas implements Runnable
         
         if(State == STATE.GAME)
         {
-            
             g.drawImage(bg, 0, 0, WIDTH, HEIGHT, null);
         
             handler.render(g);
             hud.render(g);
+			score.render(g);
+			
         } else if(State == STATE.MENU)
         {
             
@@ -284,6 +289,7 @@ class Game extends Canvas implements Runnable
             }
             else if(time>60)
             {
+				if(!epic) score.scoreMult = 2;
                 if(a%30 == 0 && handler.count <31)
                 {
                     int x = randomGenerator(32, WIDTH-32);
@@ -293,6 +299,7 @@ class Game extends Canvas implements Runnable
                 }
                 else if (time>120)
                 {
+					if(!epic) score.scoreMult = 3;
                     if(a%75 == 0 && handler.count < 39)
                     {
                         int x = randomGenerator(64, WIDTH-64);
@@ -302,6 +309,7 @@ class Game extends Canvas implements Runnable
                     }
                     else if(time>300)
                     {
+						if(!epic) score.scoreMult = 4;
                         //int b = randomGenerator(1,1000);
                         if(boss!=true)
                         {
