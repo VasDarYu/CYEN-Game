@@ -23,7 +23,7 @@ class Game extends Canvas implements Runnable
     private Menu menu;
     private Random random;
     private Lose lose;
-    private int time = 0;
+    public static int time = 0;
     public static boolean epic = false;
     private boolean read = false;
     private boolean read2 = false;

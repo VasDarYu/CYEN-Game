@@ -8,6 +8,10 @@ abstract class GameObject
 	protected int velX, velY;
 	public  boolean gone = false;
 	
+	public boolean heal = false;
+	public boolean shield = false;
+	public boolean bullet = false;
+	
 	public GameObject(int x, int y, ID id)
 	{
 		this.x = x;

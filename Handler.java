@@ -49,7 +49,7 @@ class Handler
     {
         for(GameObject obj : object)
         {
-            obj.y=game.HEIGHT;
+            if(obj.id!=ID.Player)obj.y=game.HEIGHT;
         }
     }
 }

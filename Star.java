@@ -10,6 +10,9 @@ class Star extends GameObject
     private Game game;
 	private Handler handler;
 	private BufferedImage star;
+	//public boolean heal = false;
+	//public boolean shield = false;
+	//public boolean bullet = false;
 	//public  boolean gone = false;
 	public Star(int x, int y, ID id, Handler handler, int vertical, Game game)
     {
@@ -18,6 +21,7 @@ class Star extends GameObject
         this.game = game;
         //velX = vertical;
         velY = vertical;
+        getEffect();
 	}
 	
 	public Rectangle getBounds()
@@ -39,6 +43,7 @@ class Star extends GameObject
 		    
             //velX = game.randomGenerator(1, 5);
             velY = game.randomGenerator(1, 5);
+            getEffect();
 		  }
 		if(x <= 0 || x >= Game.WIDTH - 32) velX *= -1;
 	}
@@ -46,7 +51,9 @@ class Star extends GameObject
 	{
 		try 
 		{
-			star = ImageIO.read(new File("spr/star.png"));
+		    if(heal==true)star = ImageIO.read(new File("spr/star.png"));
+		    else if(shield==true)star = ImageIO.read(new File("spr/shieldstar.png"));
+		    else if(bullet==true)star = ImageIO.read(new File("spr/bulletstar.png"));
 		} catch (IOException e) {System.out.println("This is bullshit:" + e);}
 	    //if(id == ID.Player) g.setColor(Color.green);
 		//else g.setColor(Color.blue);
@@ -56,5 +63,16 @@ class Star extends GameObject
 	public void delete()
 	{
 	    handler.removeObject(this);
+	}
+	private void getEffect()
+	{
+	    heal = false;
+	    shield = false;
+	    bullet = false;
+	    int a = game.randomGenerator(1,100);
+	    if(a%4==0)shield=true;
+	    //else if(a%2==0)heal=true;
+	    else if(a%25==0)bullet=true;
+	    else heal=true;
 	}
 }

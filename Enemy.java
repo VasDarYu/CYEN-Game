@@ -42,13 +42,13 @@ class Enemy extends GameObject
 						 dimensionC = 32;
 						 path = "spr/medium.png";
 						 break;
-			case Big: dimensionA = 164;
+			case Big: dimensionA = 64;
 					  dimensionB = 64;
 					  dimensionC = 64;
 					  path = "spr/big.png";
 					  break;
-			case Boss: dimensionA = 128; 
-					   dimensionB = 128;
+			case Boss: dimensionA = 208; 
+					   dimensionB = 208;
 					   dimensionC = 208;
 					   path = "spr/boss.png";
 					   break;
@@ -71,8 +71,9 @@ class Enemy extends GameObject
         if(y >= Game.HEIGHT) 
         {
             x= game.randomGenerator(dimensionA, game.WIDTH-dimensionB);
-			if(size == ID.Boss) y = -128;
-			else y = 0;
+			//if(size == ID.Boss) y = -208;
+			//else 
+			y = 0;
             a = game.randomGenerator(0,1);
             velX = game.randomGenerator(1, 5);
             velY = game.randomGenerator(1, 5);
