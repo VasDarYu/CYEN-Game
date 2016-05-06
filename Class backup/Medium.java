@@ -36,7 +36,6 @@ class Medium extends GameObject
 		{
 		    x= game.randomGenerator(32, game.WIDTH-32);
 		    y=0;
-		    
             a = game.randomGenerator(0,1);
             velX = game.randomGenerator(1, 5);
             velY = game.randomGenerator(1, 5);

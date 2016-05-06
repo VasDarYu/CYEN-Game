@@ -280,7 +280,7 @@ class Game extends Canvas implements Runnable
                  int x = randomGenerator(16, WIDTH-16);
                  int yspeed = randomGenerator(3,8);
                  int xspeed = randomGenerator(0,10);
-                 handler.addObject(new Small(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
+                 handler.addObject(new Enemy(x, 0, ID.Projectile, handler, yspeed, xspeed, this, ID.Small));
             }
             else if(time>60)
             {
@@ -289,7 +289,7 @@ class Game extends Canvas implements Runnable
                     int x = randomGenerator(32, WIDTH-32);
                     int yspeed = randomGenerator(3,8);
                     int xspeed = randomGenerator(0,10);
-                    handler.addObject(new Medium(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
+                    handler.addObject(new Enemy(x, 0, ID.Projectile, handler, yspeed, xspeed, this, ID.Medium));
                 }
                 else if (time>120)
                 {
@@ -298,7 +298,7 @@ class Game extends Canvas implements Runnable
                         int x = randomGenerator(64, WIDTH-64);
                         int yspeed = randomGenerator(3,8);
                         int xspeed = randomGenerator(0,5);
-                        handler.addObject(new Big(x, 0, ID.Projectile, handler, yspeed, xspeed, this));
+                        handler.addObject(new Enemy(x, 0, ID.Projectile, handler, yspeed, xspeed, this, ID.Big));
                     }
                     else if(time>300)
                     {
@@ -308,7 +308,7 @@ class Game extends Canvas implements Runnable
                             int x = randomGenerator(128, WIDTH-128);
                             int yspeed = randomGenerator(3,8);
                             int xspeed = randomGenerator(0,3);
-                            handler.addObject(new Boss(x, -128, ID.Projectile, handler, yspeed, xspeed, this));
+                            handler.addObject(new Enemy(x, -128, ID.Projectile, handler, yspeed, xspeed, this, ID.Boss));
                             boss=true;
                             
                         }
