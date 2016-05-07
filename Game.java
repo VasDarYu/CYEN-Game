@@ -30,6 +30,7 @@ class Game extends Canvas implements Runnable
     private boolean boss = false;
     private int loop = 0;
 	private Score score;
+	private Music music;
     public static enum STATE
     {
         MENU,
@@ -68,8 +69,11 @@ class Game extends Canvas implements Runnable
         
         hud = new HUD();
 		score = new Score();
-        
-        
+		try
+		{
+        music = new Music();
+		} catch (Exception e) {}
+
         handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this));
         //handler.addObject(new Star(randomGenerator(64, WIDTH-64), 0, ID.Star, handler, randomGenerator(1,5), this));
     }
