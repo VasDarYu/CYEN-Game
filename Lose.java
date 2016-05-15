@@ -10,19 +10,25 @@ import java.io.File;
 class Lose
 {
     public Rectangle tryButton = new Rectangle(Game.WIDTH / 2 - 50, 200, 100, 50);
-	public Rectangle exitButton = new Rectangle(Game.WIDTH / 2 - 50, 400, 100, 50);
+	public Rectangle exitButton = new Rectangle(Game.WIDTH / 2 - 50, 400, 100, 50);	
+	private BufferedImage logo;
     public void render(Graphics g)
     {
         Graphics2D g2d = (Graphics2D)g;
+        try 
+		{
+			logo = ImageIO.read(new File("bg/SpaceExplode.png"));
+		} catch (IOException e) {}
+		
+		g.drawImage(logo, 0, 0, Game.WIDTH, Game.HEIGHT, null);
         
-        Font fnt0 = new Font("arial", Font.BOLD, 50);
+		Font fnt0 = new Font("arial", Font.BOLD, 50);
         g.setFont(fnt0);
         g.setColor(Color.white);
         g.drawString("You lose", (Game.WIDTH/2 - 100), 50);
         //g.drawString("Fighter Z 2:", 240, 100);
         //g.drawString("Maximum Ninja Storm", 100, 150);
-    
-        
+
         Font fnt1 = new Font("arial", Font.BOLD, 30);
         g.setFont(fnt1);
         
