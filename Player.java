@@ -11,6 +11,7 @@ class Player extends GameObject
     Game game;
     Handler handler;
     BufferedImage ship;
+    Score score;
     private int then;
     private int now;
     public Player(int x, int y, ID id, Handler handler, Game game)
@@ -50,7 +51,7 @@ class Player extends GameObject
                     {
                         if(shield!=true)
                         {
-                            HUD.HEALTH -= 15;
+                            HUD.HEALTH -= 10;
                             obj.y=game.HEIGHT;
                         }
                     }
@@ -61,11 +62,11 @@ class Player extends GameObject
                     {
                         if(obj.heal==true)
                         {
-                            if(shield!=true)
-                            {
-                                HUD.HEALTH += 15;
+                            //if(shield!=true)
+                            //{
+                                HUD.HEALTH += 25;
                                 obj.y=game.HEIGHT;
-                            }
+                            //}
                         }
                         else if(obj.shield==true)
                         {
@@ -78,10 +79,15 @@ class Player extends GameObject
                         }
                         else if(obj.bullet==true)
                         {
-                            if(shield!=true)
-                            {
+                            //if(shield!=true)
+                            //{
                                 handler.reset();
-                            }
+                            //}
+                        }
+                        else if(obj.coin==true)
+                        {
+                            score.score += 1500;
+                            obj.y=game.HEIGHT;
                         }
                     }
                 }

@@ -54,6 +54,7 @@ class Star extends GameObject
 		    if(heal==true)star = ImageIO.read(new File("spr/star.png"));
 		    else if(shield==true)star = ImageIO.read(new File("spr/shieldstar.png"));
 		    else if(bullet==true)star = ImageIO.read(new File("spr/bulletstar.png"));
+		    else if(coin==true)star = ImageIO.read(new File("spr/coin.png"));
 		} catch (IOException e) {System.out.println("This is bullshit:" + e);}
 	    //if(id == ID.Player) g.setColor(Color.green);
 		//else g.setColor(Color.blue);
@@ -69,10 +70,12 @@ class Star extends GameObject
 	    heal = false;
 	    shield = false;
 	    bullet = false;
+	    coin = false;
 	    int a = game.randomGenerator(1,100);
-	    if(a%4==0)shield=true;
-	    //else if(a%2==0)heal=true;
+	    int b = game.randomGenerator(0,1);
+	    if(a%10==0)shield=true;
 	    else if(a%25==0)bullet=true;
+	    else if(HUD.HEALTH==100)coin=true;
 	    else heal=true;
-	}
+	   }
 }

@@ -11,6 +11,7 @@ abstract class GameObject
 	public boolean heal = false;
 	public boolean shield = false;
 	public boolean bullet = false;
+	public boolean coin = false;
 	
 	public GameObject(int x, int y, ID id)
 	{
