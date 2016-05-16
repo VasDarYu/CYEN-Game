@@ -22,7 +22,6 @@ class Game extends Canvas implements Runnable
     private BufferedImage bg;
     private Menu menu;
     private Random random;
-    private Lose lose;
     public static int time = 0;
     public static boolean epic = false;
     private boolean read = false;
@@ -31,6 +30,8 @@ class Game extends Canvas implements Runnable
     private int loop = 0;
 	private Score score;
 	private Music music;
+	public static Leaderboard leaderboard;
+	private boolean highscore = true;
     public static enum STATE
     {
         MENU,
@@ -58,7 +59,6 @@ class Game extends Canvas implements Runnable
     public Game()
     {
         menu = new Menu();
-        lose = new Lose();
         initImages();
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
@@ -73,6 +73,7 @@ class Game extends Canvas implements Runnable
 		{
         music = new Music();
 		} catch (Exception e) {}
+		leaderboard = new Leaderboard();
 
         handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this));
         //handler.addObject(new Star(randomGenerator(64, WIDTH-64), 0, ID.Star, handler, randomGenerator(1,5), this));
@@ -233,11 +234,15 @@ class Game extends Canvas implements Runnable
         } 
         else if(State == STATE.LOSE)
         {
-            g.setColor(Color.red);
+            g.setColor(Color.white);
             g.fillRect(0, 0, WIDTH, HEIGHT);
             
-            lose.render(g);
-            
+            menu.render(g);
+            if(highscore&&leaderboard.isHighScore(score.toString()))
+			{
+				leaderboard.prompt(score.toString());
+				highscore = false;
+			}
         }
         
         

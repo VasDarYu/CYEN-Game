@@ -36,8 +36,10 @@ class MouseInput implements MouseListener
                 }
                 else if(Game.State==Game.STATE.LOSE)
                 {
-                    Game.State = Game.STATE.MENU;
-                }
+                    //Game.State = Game.STATE.MENU;
+					game.leaderboard.showLeaderboard();
+					//System.out.println("THIS HAPPESFAWEFWA");
+				}
             }
         }
         if(mx >=Game.WIDTH / 2 - 50 && mx <= Game.WIDTH / 2 + 50)
