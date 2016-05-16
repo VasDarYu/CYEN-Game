@@ -32,6 +32,7 @@ class Game extends Canvas implements Runnable
 	private Music music;
 	public static Leaderboard leaderboard;
 	private boolean highscore = true;
+	private Player player;
     public static enum STATE
     {
         MENU,
@@ -67,15 +68,18 @@ class Game extends Canvas implements Runnable
         
         random = new Random();
         
-        hud = new HUD();
 		score = new Score();
 		try
 		{
         music = new Music();
 		} catch (Exception e) {}
 		leaderboard = new Leaderboard();
+		
+		player = new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this);
 
-        handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler, this));
+		hud = new HUD(player);
+		
+        handler.addObject(player);
         //handler.addObject(new Star(randomGenerator(64, WIDTH-64), 0, ID.Star, handler, randomGenerator(1,5), this));
     }
     
