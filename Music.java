@@ -8,11 +8,10 @@ import sun.audio.*;
  */
 class Music
 {
-	public Music() throws Exception
+	public Music(String path) throws Exception
 	{
 		// open the sound file as a Java input stream
-		String gongFile = "bgm/test.au";
-		InputStream in = new FileInputStream(gongFile);
+		InputStream in = new FileInputStream(path);
  
 		// create an audiostream from the inputstream
 		AudioStream audioStream = new AudioStream(in);

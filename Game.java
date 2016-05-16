@@ -29,7 +29,6 @@ class Game extends Canvas implements Runnable
     private boolean boss = false;
     private int loop = 0;
 	private Score score;
-	private Music music;
 	public static Leaderboard leaderboard;
 	private boolean highscore = true;
 	private Player player;
@@ -71,7 +70,7 @@ class Game extends Canvas implements Runnable
 		score = new Score();
 		try
 		{
-        music = new Music();
+        new Music("bgm/test.au");
 		} catch (Exception e) {}
 		leaderboard = new Leaderboard();
 		

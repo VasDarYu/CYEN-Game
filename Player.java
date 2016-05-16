@@ -53,6 +53,10 @@ class Player extends GameObject
                         {
                             HUD.HEALTH -= 10;
                             obj.y=game.HEIGHT;
+							try
+							{
+								new Music("bgm/hit.au");
+							} catch (Exception e) {}
                         }
                     }
                 }
@@ -66,6 +70,10 @@ class Player extends GameObject
                             //{
                                 HUD.HEALTH += 25;
                                 obj.y=game.HEIGHT;
+								try
+								{
+									new Music("bgm/heal.au");
+								} catch (Exception e) {}
                             //}
                         }
                         else if(obj.shield==true)
@@ -75,6 +83,10 @@ class Player extends GameObject
                                 this.shield = true;
                                 then = game.time;
                                 obj.y=game.HEIGHT;
+								try
+								{
+									new Music("bgm/shield.au");
+								} catch (Exception e) {}
                             }
                         }
                         else if(obj.bullet==true)
@@ -82,12 +94,20 @@ class Player extends GameObject
                             //if(shield!=true)
                             //{
                                 handler.reset();
+								try
+								{
+									new Music("bgm/bomb.au");
+								} catch (Exception e) {}
                             //}
                         }
                         else if(obj.coin==true)
                         {
                             score.score += 1500;
                             obj.y=game.HEIGHT;
+							try
+							{
+								new Music("bgm/coin.au");
+							} catch (Exception e) {}
                         }
                     }
                 }
